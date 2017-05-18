@@ -1,3 +1,6 @@
+#include "Node.h"
+#include <iostream>
+
 using namespace std;
 
 Node* Node::getLeft(){
@@ -25,6 +28,10 @@ Node* Node::getUncle(){
 int Node::getData(){
   return data;
 }
+void Node::setData(int newData){
+  data = newData;
+}
+
 void Node::setLeft(Node* node){
   left = node;
   if (left){
@@ -55,7 +62,10 @@ Node::~Node(){
   delete &data;
 }
 bool Node::isRed(){
-  return red;
+  if (this){
+    return red;
+  }
+  else return false;
 }
 bool Node::isRight(){
   return rightChild;
@@ -66,4 +76,3 @@ void Node::setRed(bool isRed){
 void Node::setIsRight(bool Right){
   rightChild = Right;
 }
-
