@@ -14,6 +14,7 @@ class Node{
   Node* getRight();
   Node* getUncle();
   int getData(); //returns the student the node points to
+  void setData(int newData);
   void setLeft(Node* node); //sets the pointer to the next node
   void setRight(Node* node);
   void setParent(Node* node);
