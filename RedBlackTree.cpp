@@ -19,6 +19,8 @@ void RedBlackTree::rotateLeft(Node* current){
   }
   current->setRight(newHead->getLeft());
   newHead->setLeft(current);
+  
+  
 }
 void RedBlackTree::rotateRight(Node* current){
   Node* newHead = current->getLeft();
@@ -33,12 +35,12 @@ void RedBlackTree::rotateRight(Node* current){
   }
   current->setLeft(newHead->getRight());
   newHead->setRight(current);
-}
 
+}
 void RedBlackTree::fix(Node* current){
   if (current->isRed() && current->getParent()->isRed()){
     if (!current->getUncle()->isRed()){
-       if(current->isRight()  && !current->getParent()->isRight()){
+      if(current->isRight()  && !current->getParent()->isRight()){
 	rotateLeft(current->getParent());
 	current = current->getLeft();
       }
@@ -66,8 +68,8 @@ void RedBlackTree::fix(Node* current){
   }
   head->setRed(false);
 }
-
 void RedBlackTree::fix2Black(Node* black,Node* parent){
+  
   if (black == head) return;
   if (parent->getLeft() == black){
    if (parent->getRight()->isRed()){
@@ -95,12 +97,6 @@ void RedBlackTree::fix2Black(Node* black,Node* parent){
       parent->getRight()->setRed(false);
       fix2Black(black,parent);
     }
-    else if (parent->getRight() -> getLeft() -> isRed()){
-      rotateRight(parent->getRight());
-      parent -> getRight() -> getRight()->setRed(true);
-      parent -> getRight()->setRed(false);
-      fix2Black(black, parent);
-    }
     else{
       rotateLeft(parent);
       parent->getParent()->setRed(parent->isRed());
@@ -121,6 +117,13 @@ void RedBlackTree::fix2Black(Node* black,Node* parent){
              !parent->getLeft()->getLeft()->isRed()){
       parent->getLeft()->setRed(true);
       fix2Black(parent,parent->getParent());
+    }
+    else if (parent->isRed() &&
+             !parent->getLeft()->getRight()->isRed() &&
+             !parent->getLeft()->getLeft()->isRed()){
+      parent->setRed(false);
+      parent->getLeft()->setRed(true);
+      return;
     }
     else if(parent->getLeft()->getRight()->isRed()){
       rotateLeft(parent->getLeft());
@@ -155,7 +158,6 @@ void RedBlackTree::remove(Node* toDelete){
   if (toDelete == head){
     head = child;
   }
-  
   if (toDelete->isRight()){
     parent->setRight(child);
   }
