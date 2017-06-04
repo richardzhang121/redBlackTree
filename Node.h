@@ -1,3 +1,4 @@
+//Nodes that will be used in a red Black tree
 #ifndef NODE_H
 #define NODE_H
 
