@@ -1,3 +1,4 @@
+//A self sorting and balancing tree
 #include <iostream>
 #include "Node.h"
 
